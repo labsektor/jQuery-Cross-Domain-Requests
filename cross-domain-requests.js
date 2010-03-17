@@ -11,24 +11,25 @@ function requestCrossDomain(site) {
 	
 	var that = this;
 	
-	function isExternal(url) {
-		// Extend this quite a bit. Lackluster right now.
-		return url.match('https?://|www\.');
-	}
-	
+	// EXPAND THIS! SUCKS RIGHT NOW.
+	function isExternal(url) { return url.match('https?://|www\.'); }
 	
 	if ( isExternal(site) ) {
 		// cross domain request
 		yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=xml&callback=?';
 
 		$.getJSON(yql, function(data) {
-			data = data.results[0].replace(/<script[^>]*>[\s\S]*?<\/script>/g,'');
-
-			$(that).parent().html(data);
+			if ( data.results[0] ) {
+				data = data.results[0].replace(/<script[^>]*>[\s\S]*?<\/script>/g,'');
+				$(that).parent().html(data);
+			}
+			
+			else throw new Error('Nothing returned from getJSON.');
 		});
 	}
 		
 	else {
+		// local request. 
 		$(that).parent().load(site);
 	}
 	
