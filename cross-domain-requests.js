@@ -2,13 +2,11 @@
  * Create a YQL query, strip all script tags, and insert into the parent element.
 */ 
 
-function requestCrossDomain(site, callback) {
+function requestCrossDomain( site, callback ) {
 	if ( !site ) {
 		alert('No site passed');
 		return false;
 	}
-	
-	var that = this;
 	
 	yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=xml&callback=?';
 
