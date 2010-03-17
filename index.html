@@ -25,7 +25,11 @@
 				
 $('form').submit(function() {
 	var path = $('#sitename').val();
-	requestCrossDomain.call(this, path);
+	
+	requestCrossDomain(path, function(results) {
+		$('#container').html(results);
+	});
+	
 	return false;
 });		
 	
