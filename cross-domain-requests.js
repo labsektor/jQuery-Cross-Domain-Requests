@@ -19,7 +19,7 @@ function requestCrossDomain( site, callback ) {
 	if ( data.results[0] ) {
 		// Strip out all script tags, for security reasons.
 		// BE VERY CAREFUL. This helps, but we should do more. 
-		data = data.results[0].replace(/&lt;script[^>]*>[\s\S]*?&lt;\/script>/, '');
+		data = data.results[0].replace(/&lt;script[^>]*>[\s\S]*?&lt;\/script>/gi, '');
 		
 		// If the user passed a callback, and it
 		// is a function, call it, and send through the data var.
